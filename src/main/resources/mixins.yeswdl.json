@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "minVersion": "0.5.3",
+    "package": "fuck.you.yeswdl.mixins",
+    "refmap": "mixins.yeswdl.refmap.json",
+    "mixins": [
+        "MixinNetworkManager"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

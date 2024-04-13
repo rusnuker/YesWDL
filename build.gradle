@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            name = "forge"
+            url = "https://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "spongepowered"
+            url = 'https://repo.spongepowered.org/maven'
+        }
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:' + project.forgeGradleVersion
+        classpath 'org.spongepowered:mixingradle:0.5-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.liteloader'
+apply plugin: 'org.spongepowered.mixin'
+
+group = "fuck.you.yeswdl" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "yeswdl"
+
+minecraft {
+    // these values are defined in the gradle.properties file, so that this file does not need to be altered
+    version = project.mcVersion
+    mappings = project.mcMappings
+    runDir = "run"
+}
+
+sourceSets {
+    main {
+        // Refmap declaration must match the refmap name specified in the json config
+        ext.refMap = "mixins.yeswdl.refmap.json"
+    }
+}
+
+mixin {
+    // liteloader does not do runtime deobfuscation, so in production we use "notch names", mixin needs to know this
+    defaultObfuscationEnv notch
+}
+
+litemod {
+    json {
+        name = "yeswdl"
+        mcversion = project.targetVersion
+        description = "A LiteMod mod for LiteLoader mod loader that bypasses NoWorldDownloader."
+        mixinConfigs += "mixins.yeswdl.json"
+    }
+}
+
+jar {
+    // The litemod task above generates the litemod.json dynamically, you can replace it with a resource if you want more control
+    from litemod.outputs
+}
