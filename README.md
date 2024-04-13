@@ -8,4 +8,7 @@ Do I really need to explain??
 0. Download LiteLoader for 1.12.2.
 1. Download the latest release from Releases and the WorldDownloader itself.
 2. Place both files into the `.minecraft/mods/` folder.
-2. Run LiteLoader!
+3. Run LiteLoader!
+
+# !!! NOTE !!!
+If you're running WorldDownloader with a Forge version of LiteLoader, this mod is **not** needed!
